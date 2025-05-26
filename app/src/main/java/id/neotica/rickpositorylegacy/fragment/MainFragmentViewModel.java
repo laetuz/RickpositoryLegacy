@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import id.neotica.rickpositorylegacy.data.CharacterRepositoryImpl;
@@ -16,8 +18,8 @@ public class MainFragmentViewModel extends ViewModel {
     private final CharacterRepositoryImpl characterRepository;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    private final MutableLiveData<CharactersModel> _charactersLiveData = new MutableLiveData<>();
-    public LiveData<CharactersModel> characters = _charactersLiveData;
+    private final MutableLiveData<List<CharactersModel>> _charactersLiveData = new MutableLiveData<>();
+    public LiveData<List<CharactersModel>> characters = _charactersLiveData;
 
 
     private final MutableLiveData<String> _error = new MutableLiveData<>();
@@ -34,7 +36,7 @@ public class MainFragmentViewModel extends ViewModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        response -> _charactersLiveData.setValue(response),
+                        response -> _charactersLiveData.setValue(response.getResults()),
                         throwable -> _error.setValue(throwable.getMessage())
                 )
         );
