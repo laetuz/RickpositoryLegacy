@@ -53,6 +53,11 @@ dependencies {
     // Dagger 2
     implementation(libs.dagger.core)
     annotationProcessor(libs.dagger.compiler)
+    // Optional, but recommended for Android Dagger 2 setup:
+    implementation(libs.dagger.android)
+    annotationProcessor(libs.dagger.android.processor)
+    implementation(libs.dagger.android.support)
+    annotationProcessor(libs.dagger.android.processor)
 
     //Retrofit
     implementation(libs.retrofit.core)
